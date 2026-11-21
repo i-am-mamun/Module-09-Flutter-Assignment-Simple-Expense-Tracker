@@ -1,10 +1,15 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart' show databaseFactory;
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart'
+    show databaseFactoryFfiWeb;
 
 import 'data/expense_store.dart';
 import 'data/sqlite_expense_store.dart';
 import 'screens/home_screen.dart';
 
 void main() {
+  if (kIsWeb) databaseFactory = databaseFactoryFfiWeb;
   runApp(ExpenseTrackerApp(store: SqliteExpenseStore.instance));
 }
 
